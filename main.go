@@ -16,9 +16,9 @@ func main() {
 	// sleep for a long time
 	time.Sleep(1 * time.Second)
 	fmt.Println("Main ready!")
-	for {
+	for greeting := range ch {
 		// receive greeting
-		greeting := <-ch
+		
 		// sleep and print
 		time.Sleep(500 * time.Millisecond)
 		fmt.Println("Greeting received!", greeting)
@@ -34,4 +34,5 @@ func greet(ch chan<- string) {
 		ch <- g
 	}
 	fmt.Println("Greeter completed!")
+	close(ch)
 }
